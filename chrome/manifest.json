@@ -1,0 +1,32 @@
+{
+    "name": "Litcode",
+    "version": "1.0",
+    "description": "Grind Leetcode",
+    "manifest_version": 2,
+    "background": {
+        "persistent": true,
+        "scripts": [
+            "socket.io.js",
+            "background.js"
+        ]
+    },
+    "permissions": [
+        "tabs"
+    ],
+    "page_action": {
+        "default_title": "Litcode",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://leetcode.com/*",
+                "https://leetcode.com/*"
+            ],
+            "js": [
+                "jquery.js",
+                "contentscript.js"
+            ]
+        }
+    ]
+  }

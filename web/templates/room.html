@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>LitCode</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='tagsinput.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='socket.io.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='room.js') }}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <input type="hidden" id="room" value="{{ room }}">
+
+        <div class="row">
+            <div class="col">
+                <h3 class="text-center">Players</h3>
+                <ol id="players"></ol>
+            </div>
+            <div class="col">
+                <h3 class="text-center">Problem</h3>
+                <h5 id="problem"></h5>
+            </div>
+            <div class="col">
+                <h3 class="text-center">Actions</h3>
+                <div id="actions"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <button type="button" class="btn btn-primary" id="next_problem_btn">Next Problem</button>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="popup.css">
+
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
+</head>
+<body>
+    <div class="container" id="join_view" style="display: none">
+        <div class="input-group">
+            <input type="text" id="name" class="form-control" placeholder="Name">
+        </div>
+        <div class="input-group" style="padding-top: 10px">
+            <input type="text" id="room" class="form-control" placeholder="Litcode room code">
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" id="join_btn">Join</button>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="connected_view" style="display: none">
+        <h5 id="connected_text"></h5>
+        <button type="button" class="btn btn-outline-danger" id="leave_btn">Rage quit</button>
+    </div>
+</body>
+</html>
