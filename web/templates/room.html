@@ -20,21 +20,21 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container h-100">
         <input type="hidden" id="room" value="{{ room }}">
 
-        <div class="row">
+        <div class="row h-100">
             <div class="col-2"></div>
-            <div class="col-3">
+            <div class="col-3" id="left_col">
                 <h3 class="text-center">Players</h3>
-                <h4>Accepted Players</h4>
+                <h4>Leaderboard</h4>
                 <ol id="accepted_players"></ol>
 
-                <h4>All Players</h4>
+                <h4>Connected Players</h4>
                 <ol id="players"></ol>
             </div>
             <div class="col-2"></div>
-            <div class="col-3">
+            <div class="col-3" id="right_col">
                 <h3 class="text-center">Actions</h3>
                 <div id="actions"></div>
             </div>
@@ -43,8 +43,11 @@
 
     <footer class="footer">
         <div class="container text-center">
-            <h5>Current Problem: </h5><h4 id="problem"></h4>
-            <button type="button" class="btn btn-primary" id="next_problem_btn">Next Problem</button>
+            <h5 style="padding-right: 5px">Current Problem: </h5><h4 id="problem"></h4>
+            <button type="button" class="btn btn-primary btn-sm" id="next_problem_btn">
+                Next Problem
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </button>
         </div>
     </footer>
 </body>
