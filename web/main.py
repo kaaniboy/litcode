@@ -15,7 +15,7 @@ socketio = SocketIO(app)
 rooms = {}
 sockets = {}
 
-PROBLEMS = ['Two Sum', 'Three Sum', 'Four Sum']
+PROBLEMS = ['1. Two Sum', 'Three Sum', 'Four Sum']
 
 @app.route('/', methods=['GET'])
 def index_get():
@@ -49,7 +49,7 @@ def create_room_post():
 
     rooms[room] = {
         'password': password,
-        'problem': 'Two Sum',
+        'problem': '1. Two Sum',
         'accepted_players': []
     }
 
@@ -105,6 +105,9 @@ def handle_run(data):
     name = sockets[request.sid]['name']
     room = sockets[request.sid]['room']
 
+    if data['problem'] != rooms[room]['problem']:
+        return
+
     emit('run', {'name': name, 'room': room}, room=room)
     
     print('%s ran code in room %s' % (name, room))
@@ -113,6 +116,9 @@ def handle_run(data):
 def handle_solution_accepted(data):
     name = sockets[request.sid]['name']
     room = sockets[request.sid]['room']
+
+    if data['problem'] != rooms[room]['problem']:
+        return
     
     if sockets[request.sid] not in rooms[room]['accepted_players']:
         rooms[room]['accepted_players'].append(sockets[request.sid])
@@ -125,13 +131,16 @@ def handle_solution_declined(data):
     name = sockets[request.sid]['name']
     room = sockets[request.sid]['room']
 
+    if data['problem'] != rooms[room]['problem']:
+        return
+
     emit('solution_declined', {'name': name, 'room': room}, room=room)
     emit('room_info', _get_room_info(room), room=room)
 
 @socketio.on('next_problem')
 def handle_next_problem(data):
     room = sockets[request.sid]['room']
-    
+
     rooms[room]['problem'] = random.choice(PROBLEMS)
     rooms[room]['accepted_players'] = []
 

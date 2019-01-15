@@ -1,6 +1,7 @@
 let POLL_INTERVAL = 500;
 let ACCEPTED_TEXT = 'Submission Result: Accepted';
 let DECLINED_TEXT = 'Submission Result: Wrong Answer';
+let problem = null;
 let runButton = null;
 let submitButton = null;
 
@@ -11,6 +12,7 @@ $(document).ready(() => {
 function setup() {
     runButton = $($('.action .row .pull-right')[1]).find('button')[0];
     submitButton = $($('.action .row .pull-right')[1]).find('button')[1];
+    problem = $('h3').text();
 
     // Keep trying until both buttons are present
     if (!runButton || !submitButton) {
@@ -23,7 +25,12 @@ function setup() {
 }
 
 function runCode() {
-    chrome.runtime.sendMessage({'type': 'run'});
+    chrome.runtime.sendMessage({
+        'type': 'run',
+        'data': {
+            'problem': problem
+        }
+    });
     console.log('Run code.');
 }
 
@@ -34,11 +41,21 @@ function submitCode() {
         if (~$('#result').text().indexOf(ACCEPTED_TEXT)) {
             console.log('POLLING DONE: ACCEPTED');
             clearInterval(id);
-            chrome.runtime.sendMessage({'type': 'solution_accepted'});
+            chrome.runtime.sendMessage({
+                'type': 'solution_accepted',
+                'data': {
+                    'problem': problem
+                }
+            });
         } else if (~$('#result').text().indexOf(DECLINED_TEXT)) {
             console.log('POLLING DONE: DECLINED');
             clearInterval(id);
-            chrome.runtime.sendMessage({'type': 'solution_declined'});
+            chrome.runtime.sendMessage({
+                'type': 'solution_declined',
+                'data': {
+                    'problem': problem
+                }
+            });
         }
     }, POLL_INTERVAL);
     

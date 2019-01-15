@@ -19,11 +19,11 @@ chrome.runtime.onMessage.addListener((message) => {
     } else if (message.type == 'leave') {
         leave();
     } else if (message.type == 'run') {
-        run();
+        run(message.data.problem);
     } else if (message.type == 'solution_accepted') {
-        solution_accepted();
+        solution_accepted(message.data.problem);
     } else if (message.type == 'solution_declined') {
-        solution_declined();
+        solution_declined(message.data.problem);
     }
 
     console.log(name);
@@ -49,21 +49,21 @@ function leave() {
     socket = name = room = null;
 }
 
-function run() {
+function run(problem) {
     if (socket) {
-        socket.emit('run', {});
+        socket.emit('run', {'problem': problem});
     }
 }
 
-function solution_accepted() {
+function solution_accepted(problem) {
     if (socket) {
-        socket.emit('solution_accepted', {});
+        socket.emit('solution_accepted', {'problem': problem});
     }
 }
 
-function solution_declined() {
+function solution_declined(problem) {
     if (socket) {
-        socket.emit('solution_declined', {});
+        socket.emit('solution_declined', {'problem': problem});
     }
 }
 
