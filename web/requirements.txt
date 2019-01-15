@@ -2,5 +2,5 @@ Flask==1.0.2
 Flask_SocketIO==3.0.2
 requests==2.19.1
 beautifulsoup4==4.7.1
-gunicorn=19.9.0
+gunicorn==19.9.0
 eventlet==0.24.1
