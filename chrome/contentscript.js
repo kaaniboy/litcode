@@ -35,6 +35,8 @@ function runCode() {
 }
 
 function submitCode() {
+    let code = $('[name="lc-codemirror"]').text();
+
     let id = setInterval(() => {
         console.log('POLLING!');
 
@@ -44,7 +46,8 @@ function submitCode() {
             chrome.runtime.sendMessage({
                 'type': 'solution_accepted',
                 'data': {
-                    'problem': problem
+                    'problem': problem,
+                    'code': code
                 }
             });
         } else if (~$('#result').text().indexOf(DECLINED_TEXT)) {

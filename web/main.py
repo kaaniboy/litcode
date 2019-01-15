@@ -83,7 +83,8 @@ def handle_join(data):
 
     sockets[request.sid] = {
         'name': name,
-        'room': room
+        'room': room,
+        'code': ''
     }
 
     emit('room_info', _get_room_info(room), room=room)
@@ -120,6 +121,8 @@ def handle_solution_accepted(data):
     if data['problem'] != rooms[room]['problem']:
         return
     
+    sockets[request.sid]['code'] = data['code']
+
     if sockets[request.sid] not in rooms[room]['accepted_players']:
         rooms[room]['accepted_players'].append(sockets[request.sid])
 

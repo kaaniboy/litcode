@@ -21,7 +21,7 @@ chrome.runtime.onMessage.addListener((message) => {
     } else if (message.type == 'run') {
         run(message.data.problem);
     } else if (message.type == 'solution_accepted') {
-        solution_accepted(message.data.problem);
+        solution_accepted(message.data.problem, message.data.code);
     } else if (message.type == 'solution_declined') {
         solution_declined(message.data.problem);
     }
@@ -55,9 +55,9 @@ function run(problem) {
     }
 }
 
-function solution_accepted(problem) {
+function solution_accepted(problem, code) {
     if (socket) {
-        socket.emit('solution_accepted', {'problem': problem});
+        socket.emit('solution_accepted', {'problem': problem, 'code': code});
     }
 }
 
