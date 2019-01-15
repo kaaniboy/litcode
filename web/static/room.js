@@ -1,5 +1,5 @@
 let FADE_TIME = 500;
-let MAX_ACTION_COUNT = 5;
+let MAX_ACTION_COUNT = 8;
 
 let socket = null;
 let room = null;
@@ -69,8 +69,23 @@ function updatePlayers() {
         $('#players').append(`<li>${p.name}</li>`);
     }
 
-    for (let a of acceptedPlayers) {
-        $('#accepted_players').append(`<li>${a.name}</li>`);
+    for (let i = 0; i < acceptedPlayers.length; i++) {
+        let a = acceptedPlayers[i];
+        
+        // Add trophy icon to top three players
+        if (i < 3) {
+            let trophyColor = 'gold';
+
+            if (i == 1) {
+                trophyColor = 'silver';
+            } else if (i == 2) {
+                trophyColor = 'bronze';
+            }
+
+            $('#accepted_players').append(`<li>${a.name} <i class="fa fa-trophy ${trophyColor}" aria-hidden="true"></i></li>`);
+        } else {
+            $('#accepted_players').append(`<li>${a.name}</li>`);
+        }
     }
 }
 

@@ -63,6 +63,18 @@ html, body {
     background-color: #f8d7da;
 }
 
+.gold {
+    color: #FFD700;
+}
+
+.silver {
+    color: #c0c0c0;
+}
+
+.bronze {
+    color: #cd7f32;
+}
+
 #players .fas {
     padding-left: 10px;
 }
