@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 import random
 import string
 
+from room_service import RoomService
+
 # Specific endpoints to admin related tasks
 class AdminEndpoints:
     def __init__( self, socketio, app ):
@@ -36,17 +38,19 @@ class AdminEndpoints:
             room = request.form['room']
             password = request.form['room_password']
 
+            rooms = RoomService.readRoom()
+
             if room in rooms:
                 session['message'] = 'The room already exists.'
                 return redirect('/')
             
             session.clear()
 
-            rooms[room] = {
+            RoomService.addRoom( room, {
                 'password': password,
                 'problem': '1. Two Sum',
                 'accepted_players': []
-            }
+            } )
 
             return redirect('/room/%s' % room)
 
@@ -54,6 +58,8 @@ class AdminEndpoints:
         def view_room_post():
             room = request.form['room']
             password = request.form['room_password']
+
+            rooms = RoomService.readRoom()
 
             if room in rooms and rooms[room]['password'] == password:
                 session.clear()
