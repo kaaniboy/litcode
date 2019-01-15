@@ -21,7 +21,10 @@ $(document).ready(() => {
 });
 
 function setupSocket() {
-    socket = io('http://localhost:5000');
+    let prefix = document.domain == 'localhost' ? 'http://' : 'https://';
+    socket = io.connect(prefix + document.domain + ':' + location.port);
+
+    // socket = io('http://litcode.herokuapp.com:5000');
 
     socket.on('connect', () => {
         socket.emit('join', {
