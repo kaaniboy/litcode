@@ -49,7 +49,8 @@ def create_room_post():
 
     rooms[room] = {
         'password': password,
-        'problem': 'Two Sum'
+        'problem': 'Two Sum',
+        'accepted_players': []
     }
 
     return redirect('/room/%s' % room)
@@ -82,13 +83,10 @@ def handle_join(data):
 
     sockets[request.sid] = {
         'name': name,
-        'room': room,
-        'accepted': False
+        'room': room
     }
 
-    players = _get_players_in_room(room)
-
-    emit('room_info', {'players': players, 'problem': 'Two Sum'}, room=room)
+    emit('room_info', _get_room_info(room), room=room)
     emit('join_accepted')
 
     print(str(sockets))
@@ -98,8 +96,7 @@ def handle_leave():
     room = sockets[request.sid]['room']
     del sockets[request.sid]
 
-    players = _get_players_in_room(room)
-    emit('room_info', {'players': players}, room=room)
+    emit('room_info', _get_room_info(room), room=room)
 
     print(str(sockets))
 
@@ -116,33 +113,42 @@ def handle_run(data):
 def handle_solution_accepted(data):
     name = sockets[request.sid]['name']
     room = sockets[request.sid]['room']
-
-    sockets[request.sid]['accepted'] = True
-
-    players = _get_players_in_room(room)
+    
+    if sockets[request.sid] not in rooms[room]['accepted_players']:
+        rooms[room]['accepted_players'].append(sockets[request.sid])
 
     emit('solution_accepted', {'name': name, 'room': room}, room=room)
-    emit('room_info', {'players': players}, room=room)
+    emit('room_info', _get_room_info(room), room=room)
 
 @socketio.on('solution_declined')
 def handle_solution_declined(data):
     name = sockets[request.sid]['name']
     room = sockets[request.sid]['room']
 
-    players = _get_players_in_room(room)
-
     emit('solution_declined', {'name': name, 'room': room}, room=room)
-    emit('room_info', {'players': players}, room=room)
+    emit('room_info', _get_room_info(room), room=room)
 
 @socketio.on('next_problem')
 def handle_next_problem(data):
     room = sockets[request.sid]['room']
+    
     rooms[room]['problem'] = random.choice(PROBLEMS)
+    rooms[room]['accepted_players'] = []
 
-    emit('room_info', {'problem': rooms[room]['problem']}, room=room)
+    emit('room_info', _get_room_info(room), room=room)
 
 def _get_players_in_room(room):
     return [s for s in sockets.values() if s['room'] == room and s['name'] != None]
+
+def _get_room_info(room):
+    players = _get_players_in_room(room)
+    accepted_players = rooms[room]['accepted_players']
+
+    return {
+        'problem': rooms[room]['problem'],
+        'players': players,
+        'accepted_players': accepted_players
+    }
 
 if __name__ == '__main__':
     socketio.run(app)

@@ -24,15 +24,17 @@
         <input type="hidden" id="room" value="{{ room }}">
 
         <div class="row">
-            <div class="col">
+            <div class="col-2"></div>
+            <div class="col-3">
                 <h3 class="text-center">Players</h3>
+                <h4>Accepted Players</h4>
+                <ol id="accepted_players"></ol>
+
+                <h4>All Players</h4>
                 <ol id="players"></ol>
             </div>
-            <div class="col">
-                <h3 class="text-center">Problem</h3>
-                <h5 id="problem"></h5>
-            </div>
-            <div class="col">
+            <div class="col-2"></div>
+            <div class="col-3">
                 <h3 class="text-center">Actions</h3>
                 <div id="actions"></div>
             </div>
@@ -41,6 +43,7 @@
 
     <footer class="footer">
         <div class="container text-center">
+            <h5>Current Problem: </h5><h4 id="problem"></h4>
             <button type="button" class="btn btn-primary" id="next_problem_btn">Next Problem</button>
         </div>
     </footer>

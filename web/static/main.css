@@ -34,8 +34,12 @@ html, body {
     bottom:20px;
 }
 
-#players {
+#players, #accepted_players {
     font-size: 20px;
+}
+
+#players {
+    list-style-type: none;
 }
 
 #actions .alert {
@@ -60,4 +64,12 @@ html, body {
     height: 60px;
     line-height: 60px;
     background-color: #f5f5f5;
+}
+
+.footer h4, h5 {
+    display: inline-block;
+}
+
+#next_problem_btn {
+    margin-left: 15px;
 }

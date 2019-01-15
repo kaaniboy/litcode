@@ -1,9 +1,10 @@
 let FADE_TIME = 500;
-let MAX_ACTION_COUNT = 2;
+let MAX_ACTION_COUNT = 5;
 
 let socket = null;
 let room = null;
 let players = [];
+let acceptedPlayers = [];
 let actionCount = 0;
 let problem = '';
 
@@ -35,9 +36,11 @@ function setupSocket() {
             $('#problem').text(problem);
         }
 
-        if (data.players) {
+        if (data.players || data.accepted_players) {
             players = data.players;
             players.sort((a, b) => a.name.localeCompare(b.name));
+            acceptedPlayers = data.accepted_players;
+            
             updatePlayers();
         }
     });
@@ -59,16 +62,15 @@ function setupSocket() {
 }
 
 function updatePlayers() {
+    $('#accepted_players').empty();
     $('#players').empty();
 
     for (let p of players) {
-        let icon = '';
+        $('#players').append(`<li>${p.name}</li>`);
+    }
 
-        if (p.accepted) {
-            icon = '<i class="fas fa-check" title="Solved question"></i>';
-        }
-
-        $('#players').append(`<li>${p.name}${icon}</li>`);
+    for (let a of acceptedPlayers) {
+        $('#accepted_players').append(`<li>${a.name}</li>`);
     }
 }
 
