@@ -5,17 +5,26 @@ class RoomService:
     def __init__( self ):
         pass
 
-    def readRoom( ):
+    def read_room( ):
         return Database.rooms
 
-    def readSocket( ):
+    def read_socket( ):
         return Database.sockets
 
-    def addRoom( roomKey, room ):
-        Database.rooms[roomKey] = room
+    def read_problems( ):
+        return Database.PROBLEMSs
 
-    def addSocket( sid, socket ):
+    def add_room( room_key, room ):
+        Database.rooms[room_key] = room
+
+    def add_socket( sid, socket ):
         Database.sockets[sid] = socket
 
-    def deleteSocket( sid ):
+    def add_code( sid, code ):
+        Database.sockets[sid]['code'] = code
+
+    def add_accepted_user( sid, room ):
+        Database.rooms[room]['accepted_players'].append( Database.sockets[sid] )
+
+    def delete_socket( sid ):
         del Database.sockets[sid]

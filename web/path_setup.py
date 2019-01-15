@@ -6,3 +6,4 @@ def setupPaths():
     sys.path.append( './routes/admin_routes' )
     sys.path.append( './service' )
     sys.path.append( './model' )
+    sys.path.append( './controller' )
