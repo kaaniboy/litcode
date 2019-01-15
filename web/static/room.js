@@ -82,11 +82,16 @@ function updatePlayers() {
                 trophyColor = 'bronze';
             }
 
-            $('#accepted_players').append(`<li>${a.name} <i class="fa fa-trophy ${trophyColor}" aria-hidden="true"></i></li>`);
+            $('#accepted_players').append(`<li onclick="showCodeModal(${i})">${a.name} <i class="fa fa-trophy ${trophyColor}" aria-hidden="true"></i></li>`);
         } else {
-            $('#accepted_players').append(`<li>${a.name}</li>`);
+            $('#accepted_players').append(`<li onclick="showCodeModal(${i})">${a.name}</li>`);
         }
     }
+}
+
+function showCodeModal(playerIndex) {
+    $('#code_modal').modal('show');
+    $('#code_modal_body').text(acceptedPlayers[playerIndex].code);
 }
 
 function addAction(action, type = 'primary') {

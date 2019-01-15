@@ -43,12 +43,33 @@
 
     <footer class="footer">
         <div class="container text-center">
-            <h5 style="padding-right: 5px">Current Problem: </h5><h4 id="problem"></h4>
+            <h5 style="padding-right: 5px">Current Problem: </h5>
+            <h4 id="problem"></h4>
             <button type="button" class="btn btn-primary btn-sm" id="next_problem_btn">
                 Next Problem
                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </button>
         </div>
     </footer>
+
+    <div class="modal fade" id="code_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <pre><code id="code_modal_body"></code></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
