@@ -15,7 +15,7 @@ socketio = SocketIO(app)
 rooms = {}
 sockets = {}
 
-PROBLEMS = ['1. Two Sum', 'Three Sum', 'Four Sum']
+PROBLEMS = ['1. Two Sum', '15. 3Sum', '18. 4Sum']
 
 @app.route('/', methods=['GET'])
 def index_get():

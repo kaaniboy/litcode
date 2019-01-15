@@ -40,7 +40,7 @@ function setupSocket() {
             players = data.players;
             players.sort((a, b) => a.name.localeCompare(b.name));
             acceptedPlayers = data.accepted_players;
-            
+
             updatePlayers();
         }
     });
@@ -86,7 +86,7 @@ function addAction(action, type = 'primary') {
         });
     }
 
-    let alertHtml = `<div class="action alert alert-${type}" style="display:none"><h5>${action}</h5><br></div>`;
+    let alertHtml = `<div class="action action-${type}" style="display:none"><h5>${action}</h5><br></div>`;
     
     $('#actions').append(alertHtml);
     

@@ -42,11 +42,25 @@ html, body {
     list-style-type: none;
 }
 
-#actions .alert {
+.action {
+    border-radius: 5px;
+    padding: 5px 5px 5px 15px;
     margin-bottom: 10px;
-    height: 70px;
-    line-height:30px;
-    padding:0px 15px;
+}
+
+.action-primary {
+    color: #004085;
+    background-color: #cce5ff;
+}
+
+.action-success {
+    color: #155724;
+    background-color: #d4edda;
+}
+
+.action-danger {
+    color: #721c24;
+    background-color: #f8d7da;
 }
 
 #players .fas {
