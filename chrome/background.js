@@ -30,7 +30,8 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 
 function join(room, name) {
-    socket = io('http://localhost:5000');
+    socket = io('https://litcode.herokuapp.com');
+    // For testing: socket = io('http://localhost:5000');
 
     socket.on('connect', () => {
         socket.emit('join', {

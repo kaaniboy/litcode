@@ -1,6 +1,8 @@
 let POLL_INTERVAL = 500;
 let ACCEPTED_TEXT = 'Submission Result: Accepted';
 let DECLINED_TEXT = 'Submission Result: Wrong Answer';
+let COMPILE_ERROR_TEXT = 'Submission Result: Compile Error';
+let TIMELIMIT_EXCEEDED_TEXT = 'Submission Result: Time Limit Exceeded'
 let problem = null;
 let runButton = null;
 let submitButton = null;
@@ -39,8 +41,9 @@ function submitCode() {
 
     let id = setInterval(() => {
         console.log('POLLING!');
+        let resultText = $('#result').text();
 
-        if (~$('#result').text().indexOf(ACCEPTED_TEXT)) {
+        if (~resultText.indexOf(ACCEPTED_TEXT)) {
             console.log('POLLING DONE: ACCEPTED');
             clearInterval(id);
             chrome.runtime.sendMessage({
@@ -50,7 +53,9 @@ function submitCode() {
                     'code': code
                 }
             });
-        } else if (~$('#result').text().indexOf(DECLINED_TEXT)) {
+        } else if (~resultText.indexOf(DECLINED_TEXT) 
+                    || ~resultText.indexOf(COMPILE_ERROR_TEXT)
+                    || ~resultText.indexOf(TIMELIMIT_EXCEEDED_TEXT)) {
             console.log('POLLING DONE: DECLINED');
             clearInterval(id);
             chrome.runtime.sendMessage({
@@ -61,6 +66,4 @@ function submitCode() {
             });
         }
     }, POLL_INTERVAL);
-    
-    console.log('Submit Code');
 }
