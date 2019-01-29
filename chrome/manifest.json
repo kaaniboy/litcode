@@ -1,7 +1,7 @@
 {
     "name": "Litcode",
     "version": "1.0",
-    "description": "Grind Leetcode",
+    "description": "Race against friends to solve Leetcode questions.",
     "manifest_version": 2,
     "background": {
         "persistent": true,

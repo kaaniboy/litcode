@@ -15,7 +15,7 @@ socketio = SocketIO(app)
 rooms = {}
 sockets = {}
 
-PROBLEMS = ['1. Two Sum', '200. Number of Islands', '141. Linked List Cycle']
+PROBLEMS = ['9. Palindrome Number', '67. Add Binary', '141. Linked List Cycle']
 
 @app.route('/', methods=['GET'])
 def index_get():
@@ -49,7 +49,7 @@ def create_room_post():
 
     rooms[room] = {
         'password': password,
-        'problem': '1. Two Sum',
+        'problem': PROBLEMS[0],
         'accepted_players': []
     }
 
